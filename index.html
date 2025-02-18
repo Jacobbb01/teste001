@@ -46,6 +46,63 @@
               </div>
             </div>
 
+          <html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador Regressivo</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f06868;
+            font-family: Arial, sans-serif;
+        }
+        .contador {
+            display: flex;
+            align-items: center;
+            background-color: #f06868;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        .icon {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="contador">
+        <span id="timer">15:00</span>
+        <span class="icon">⏳ Texto - Contagem regressiva</span>
+    </div>
+    
+    <script>
+        function startCountdown(duration) {
+            let timer = duration, minutes, seconds;
+            let countdown = setInterval(function () {
+                minutes = Math.floor(timer / 60);
+                seconds = timer % 60;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                document.getElementById("timer").textContent = minutes + ":" + seconds;
+                if (--timer < 0) {
+                    clearInterval(countdown);
+                    document.getElementById("timer").textContent = "00:00";
+                }
+            }, 1000);
+        }
+        
+        window.onload = function () {
+            startCountdown(15 * 60); // 15 minutos
+        };
+    </script>
+</body>
+</html>
+
     
     <header class="py-4">
       <div class="container">
