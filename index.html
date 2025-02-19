@@ -41,53 +41,81 @@
             <!-- Progress Bar -->
             <div class="progress-widget">
                 <div class="progress-bar" role="progressbar" style="width ; height: 44px; background-color: #E00C19;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"> <b><p class="progress-text">Felicitaciones por adquirir el Protocolo GásFit...</p></b>
-                  <span style="font-family:'Roboto'; font-size: 16px; font-weight: 700;"></span>
+                  <span style="font-family:'Roboto'; font-size: 14px; font-weight: 700;"></span>
                 </div>
               </div>
             </div>
 
           
-          <!DOCTYPE html>
-<html lang="pt-BR">
+         <!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contador Regressivo</title>
+    <title>Circular Countdown Timer</title>
     <style>
-        .timer-container {
-            background-color: #f4f4f4;
-            padding: 15px;
+        body {
             display: flex;
             justify-content: center;
             align-items: center;
+            min-height: 100vh;
+            margin: 0;
             font-family: Arial, sans-serif;
-            gap: 10px;
         }
 
-        .countdown {
-            color: #000000;
-            font-size: 32px;
-            font-weight: bold;
-            letter-spacing: 2px;
-        }
-
-        .timer-text {
-            color: #000000;
+        .countdown-container {
             display: flex;
+            gap: 20px;
             align-items: center;
-            gap: 5px;
-            font-size: 16px;
         }
 
-        .timer-icon {
-            width: 24px;
-            height: 24px;
-            fill: #000000;
+        .time-circle {
+            background-color: #c2bdbf;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: black;
+        }
+
+        .separator {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: black;
         }
     </style>
 </head>
 <body>
-    <div class="timer-container">
+    <div class="countdown-container">
+        <div class="time-circle" id="hours">00</div>
+        <span class="separator">:</span>
+        <div class="time-circle" id="minutes">00</div>
+        <span class="separator">:</span>
+        <div class="time-circle" id="seconds">00</div>
+    </div>
+
+    <script>
+        function updateCountdown() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+
+        // Update the countdown every second
+        setInterval(updateCountdown, 1000);
+        // Initial call to avoid delay
+        updateCountdown();
+
+<div class="timer-container">
         <div class="countdown" id="countdown">15:00:00</div>
         <div class="timer-text">
             <svg class="timer-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -97,36 +125,6 @@
         </div>
     </div>
 
-    <script>
-        function startCountdown() {
-            // Set the countdown for 15 minutes (in milliseconds)
-            let duration = 15 * 60 * 1000;
-            const countdownElement = document.getElementById('countdown');
-            
-            // Update every second
-            const timer = setInterval(() => {
-                duration -= 1000;
-                
-                if (duration < 0) {
-                    clearInterval(timer);
-                    countdownElement.textContent = '00:00:00';
-                    return;
-                }
-
-                // Calculate hours, minutes, seconds
-                const hours = Math.floor(duration / (1000 * 60 * 60));
-                const minutes = Math.floor((duration % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((duration % (1000 * 60)) / 1000);
-
-                // Format the time
-                const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-                
-                countdownElement.textContent = formattedTime;
-            }, 1000);
-        }
-
-        // Start the countdown when the page loads
-        window.onload = startCountdown;
     </script>
 </body>
 </html>
